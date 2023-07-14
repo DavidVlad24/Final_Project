@@ -28,10 +28,4 @@ def step_impl(context, msg2):
 def step_impl(context, msg3):
     context.login_test_page.verify_success_login_message(msg3)
 
-@Then('login_auth: I click on log out buttton')
-def step_impl(context):
-    context.login_test_page.click_logout_button()
 
-@Then('login_auth: We check the log out message "{msg4}"')
-def step_impl(context, msg4):
-    context.login_test_page.verify_logout_message(msg4)

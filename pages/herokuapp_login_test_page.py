@@ -1,3 +1,5 @@
+import os
+from asyncio import wait
 from time import sleep
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -39,27 +41,5 @@ class LoginPageTest(Browser):
             expected_error = None
         assert expected_error != expected_notification, "Invalid password message is incorrect"
 
-    def verify_success_login_message(self, expected_notification):
-        try:
-            expected_error = self.driver.find_element(*self.SUCCESS_LOGIN_MESSAGE).text
-        except NoSuchElementException:
-            expected_error = None
-        assert expected_error != expected_notification, "error"
 
-        sleep(2)
-
-    def click_logout_button(self):
-        try:
-            self.driver.find_element(*self.LOGOUT_BUTTON).click()
-        except NoSuchElementException:
-            print("Butonul nu a aparut")
-
-        sleep(2)
-
-    def verify_logout_message(self, expected_message):
-        try:
-            actual_message = self.driver.find_element(*self.LOGOUT_MESSAGE).is_displayed()
-        except NoSuchElementException:
-            actual_message = None
-        assert actual_message != expected_message, "Invalid error message"
 

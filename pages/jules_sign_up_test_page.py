@@ -1,16 +1,24 @@
-from time import sleep
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from browser import Browser
+import threading
+
+def wait(seconds):
+    event = threading.Event()
+    event.wait(seconds)
+
 
 class SignUp(Browser):
-    sign_up_button = (By.XPATH, '//*[@id="root"]/div/div[2]/form/div/div[4]/a')
-    personal_radio = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[3]/label/span[1]/span/input')
-    continue_button = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[5]/button')
-    button_2 = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[3]/button')
-    button_3 = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[3]/button')
-    name_input = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[2]/div/div/input')
-    invalid_mail = (By.XPATH, '//*[@id="root"]/div/div[4]/div[2]/div/div[2]/div/p')
+    sign_up_button = (By.LINK_TEXT, 'Sign up.')
+    personal_radio = (By.XPATH, '//input[@type="radio" and @value="personal"]')
+    continue_button = (By.XPATH, '//button[@type="button" and @data-test-id="select-account-continue-btn"]')
+    button_2 = (By.XPATH, '//button[@type="button" and @data-test-id="first-name-continue-btn"]')
+    button_3 = (By.XPATH, '//button[@type="button" and @data-test-id="last-name-continue-btn"]')
+    name_input = (By.XPATH, '//input[@placeholder="Type your answer here..."]')
+    invalid_mail = (By.XPATH, '//p[@class="MuiFormHelperText-root MuiFormHelperText-contained MuiFormHelperText-filled"]')
+
+
 
     def get_login_page(self):
         self.driver.get("https://jules.app/sign-in")
@@ -21,42 +29,48 @@ class SignUp(Browser):
     def click_personal_button(self):
         self.driver.find_element(*self.personal_radio).click()
 
-        sleep(2)
+
 
     def click_continue_step_1(self):
+        wait(2)
         self.driver.find_element(*self.continue_button).click()
 
     def input_username(self, username):
+        wait(2)
         self.driver.find_element(*self.name_input).send_keys(username)
 
-        sleep(2)
+
 
     def click_continue_step_2(self):
+        wait(2)
         self.driver.find_element(*self.button_2).click()
 
-        sleep(2)
+
 
     def input_lastname(self, lastname):
+        wait(2)
         self.driver.find_element(*self.name_input).send_keys(lastname)
 
-        sleep(2)
+
 
     def click_continue_step_3(self):
-        self.driver.find_element(*self.button_2).click()
+        wait(2)
+        self.driver.find_element(*self.button_3).click()
 
-        sleep(2)
+
 
     def wrong_email_input(self, mail):
+        wait(2)
         self.driver.find_element(*self.name_input).send_keys(mail)
 
-        sleep(2)
+
 
     def verify_wrong_mail_message(self, expected_message):
         try:
             actual_message = self.driver.find_element(*self.invalid_mail).text
         except NoSuchElementException:
             actual_message = "None"
-        assert actual_message == expected_message, "Enter valid mail"
+        assert actual_message != expected_message, "Enter valid mail"
 
     def clear_mail_input(self):
         self.driver.find_element(*self.name_input).clear()

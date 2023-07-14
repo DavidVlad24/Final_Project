@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 
 @Given('Sign_Up: I open login page')
@@ -28,9 +30,11 @@ def step_impl(context):
 def step_impl(context, u_lastname):
     context.sign_up_test_page.input_lastname(u_lastname)
 
+
 @When('Sign_Up: I click continue_button_step_3')
 def step_impl(context):
     context.sign_up_test_page.click_continue_step_3()
+
 
 @When('Sign_Up: I put wrong email "{u_email}"')
 def step_impl(context, u_email):

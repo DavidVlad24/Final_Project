@@ -1,4 +1,4 @@
-from time import sleep
+
 
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -9,6 +9,7 @@ class ForgotPassValid(Browser):
     input = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[1]/div/div/input')
     send_mail_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[2]/button')
     mail_sent_notification = (By.XPATH, '//*[@id="client-snackbar"]/div/div/span')
+    invalid_mail = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[1]/div/p')
 
     def navigate_to_main_page(self):
         self.driver.get("https://jules.app/sign-in")
@@ -22,7 +23,6 @@ class ForgotPassValid(Browser):
     def click_send_mail(self):
         self.driver.find_element(*self.send_mail_button).click()
 
-    sleep(2)
 
     def check_sent_mail_notification(self, expected_message):
         try:
