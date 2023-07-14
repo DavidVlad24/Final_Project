@@ -4,11 +4,11 @@ from browser import Browser
 
 
 class LoginPage(Browser):
-    email_input = (By.XPATH, '//*[@id="root"]/div/div[2]/form/div/div[1]/div/div/input')
-    password_input = (By.XPATH, '//*[@id="root"]/div/div[2]/form/div/div[2]/div/div/input')
-    invalid_error_message = (By.XPATH, '//*[@id="client-snackbar"]/div/span')
+    email_input = (By.XPATH, '//input[@placeholder="Enter your email"]')
+    password_input = (By.XPATH, '//input[@placeholder="Enter your password"]')
+    invalid_error_message = (By.XPATH, '//p[@class="MuiFormHelperText-root MuiFormHelperText-contained MuiFormHelperText-filled"]')
     invalid_password_none_message = (By.NAME, 'Please enter your password!')
-    login_button = (By.XPATH, '//*[@id="root"]/div/div[2]/form/div/div[3]/button')
+    login_button = (By.XPATH, '//button[@class="MuiButtonBase-root MuiButton-root MuiButton-contained jss15 jss16"]')
 
     def navigate_to_login(self):
         self.driver.get("https://jules.app/sign-in")

@@ -3,7 +3,7 @@ from browser import Browser
 
 
 class Checkbox(Browser):
-    CHECKBOX = (By.XPATH, '//*[@id="content"]/ul/li[6]/a')
+    CHECKBOX = (By.LINK_TEXT, 'Checkboxes')
 
     def navigate_to_checkbox(self):
         self.driver.get("https://the-internet.herokuapp.com/")

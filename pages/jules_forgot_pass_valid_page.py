@@ -5,11 +5,11 @@ from selenium.webdriver.common.by import By
 from browser import Browser
 
 class ForgotPassValid(Browser):
-    forgot_pass_button = (By.XPATH, '//*[@id="root"]/div/div[2]/form/div/div[3]/a')
-    input = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[1]/div/div/input')
-    send_mail_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[2]/button')
-    mail_sent_notification = (By.XPATH, '//*[@id="client-snackbar"]/div/div/span')
-    invalid_mail = (By.XPATH, '//*[@id="root"]/div/div[2]/div/div[1]/div/p')
+    forgot_pass_button = (By.LINK_TEXT, 'Forgot password?')
+    input = (By.XPATH, '//input[@placeholder="Enter your email"]')
+    send_mail_button = (By.XPATH, '//button[@class="MuiButtonBase-root MuiButton-root MuiButton-contained jss15 jss34"]')
+    mail_sent_notification = (By.XPATH, '//div[@id="client-snackbar"]')
+
 
     def navigate_to_main_page(self):
         self.driver.get("https://jules.app/sign-in")

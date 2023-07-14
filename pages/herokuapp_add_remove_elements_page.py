@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from browser import Browser
 
 class AddRemove(Browser):
-    ADD_REMOVE_ELEMENTS = (By.XPATH, '//*[@id="content"]/ul/li[2]/a')
+    ADD_REMOVE_ELEMENTS = (By.LINK_TEXT, 'Add/Remove Elements')
 
     def navigate_to_add_remove_elements(self):
         self.driver.get("https://the-internet.herokuapp.com/")

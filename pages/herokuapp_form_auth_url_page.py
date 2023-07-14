@@ -3,7 +3,7 @@ from browser import Browser
 
 
 class FormAuth(Browser):
-    FORM_AUTH = (By.XPATH, '//*[@id="content"]/ul/li[21]/a')
+    FORM_AUTH = (By.LINK_TEXT, 'Form Authentication')
 
     def navigate_to_form_auth(self):
         self.driver.get("https://the-internet.herokuapp.com/")
